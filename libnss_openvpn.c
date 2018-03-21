@@ -141,6 +141,7 @@ enum nss_status _nss_openvpn_gethostbyname_r (
                 globfree(&status_files);
                 return NSS_STATUS_SUCCESS;
             }
+            fclose(fh);
         }
         globfree(&status_files);
     }
