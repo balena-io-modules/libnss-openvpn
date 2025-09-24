@@ -1,4 +1,24 @@
 - commits:
+    - subject: Add support for OpenVPN status file version 2 format
+      hash: 227fdaa8bcf2ebb83999e08c29b3185f1c58474a
+      body: |
+        Extends parsing to handle both version 1 and version 2 status files:
+        - Detects HEADER,ROUTING_TABLE,Virtual Address headers (version 2)
+        - Handles GLOBAL_STATS terminator format (version 2)
+        - Strips ROUTING_TABLE, prefix from data lines (version 2)
+        - Maintains backward compatibility with version 1 format while
+        minimizing the diff
+
+        Fibery link: https://balena.fibery.io/search/DMrAW#Work/Project/Make-libnss-compatible-with-openvpn-status-version-2-1635
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: jaomaloy
+      nested: []
+  version: 0.0.3
+  title: ""
+  date: 2025-09-24T09:03:11.240Z
+- commits:
     - subject: Add flowzone to repo
       hash: 69448e31a5bcb68b56ce4f31642f56275d6b23b9
       body: ""
