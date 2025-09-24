@@ -72,11 +72,11 @@ enum nss_status _nss_openvpn_gethostbyname_r (
 
             int in = 0;
             while (fgets(strbuf, BUFLEN, fh)) {
-                if (strncmp(strbuf, "Virtual Address", 10) == 0) {
+                if (strncmp(strbuf, "Virtual Address", 10) == 0 || strstr(strbuf, "ROUTING_TABLE,Virtual Address") != NULL) {
                     in = 1;
                     continue;
                 }
-                if (strncmp(strbuf, "GLOBAL STATS", 10) == 0) {
+                if (strncmp(strbuf, "GLOBAL STATS", 10) == 0 || strncmp(strbuf, "GLOBAL_STATS", 12) == 0) {
                     in = 0;
                     continue;
                 }
@@ -84,7 +84,7 @@ enum nss_status _nss_openvpn_gethostbyname_r (
                     continue;
                 }
 
-                current_ip=strbuf;
+                current_ip = (strncmp(strbuf, "ROUTING_TABLE,", 14) == 0) ? strbuf + 14 : strbuf;
                 t = strchr(current_ip, ',');
                 if (t == NULL) {
                     continue;
